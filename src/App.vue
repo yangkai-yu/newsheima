@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- 匹配的组件的坑 -->
-    <div>1</div>
+    <!-- <div></div> -->
     <router-view />
   </div>
 </template>
@@ -9,6 +9,7 @@
 <style lang="less">
 // css 原生的写法
 @import url("//at.alicdn.com/t/font_1426139_jm7n2373nlh.css");
+@import url("../node_modules/vant/lib/index.css");
 // 公共的样式
 * {
   margin: 0;
@@ -31,4 +32,3 @@ em {
   font-style: normal;
 }
 </style>
-

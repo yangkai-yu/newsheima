@@ -4,7 +4,17 @@ import Vue from "vue";
 import App from "./App.vue";
 // 路由对象
 import router from "./router";
+// 引入vant ui组价库
+import Vant from "vant";
+// 导入Axios异步请求库
+import axios from "axios";
+//注册vant插件
+Vue.use(Vant);
 
+// 绑定到原型
+Vue.prototype.$axios = axios;
+//基准地址
+axios.defaults.baseURL = "http://localhost:3000";
 // 上线环境是否提示信息(忽略)
 Vue.config.productionTip = false;
 
