@@ -14,7 +14,7 @@
       <div>
         <input v-model="form.password" type="password" placeholder="密码" />
       </div>
-      <button class="btu-login" @click="headeleClick">登录</button> -->
+      <button class="btu-login" @click="headeleClick">登录</button>-->
       <!-- <footer class="foot"></footer> -->
       <van-form @submit="onSubmit" class="form">
         <van-field
@@ -31,13 +31,9 @@
           :rules="[{ required: true, message: '请填写密码' }]"
         />
         <div>
-          <van-button round block type="info" native-type="submit">
-            登录
-          </van-button>
+          <van-button round block type="info" native-type="submit">登录</van-button>
           <router-link to="/register">
-            <van-button round block class="register ">
-              注册
-            </van-button>
+            <van-button round block class="register">注册</van-button>
           </router-link>
         </div>
       </van-form>
@@ -77,16 +73,23 @@ export default {
         // .then()接收返回的数据
       }).then(res => {
         console.log(res);
-
-        const { message } = res.data;
+        // 获取到返回的信息, data是token和用户的信息，data是保存到本地的
+        const { message, data } = res.data;
+        // 使用vant的弹窗提示用，success表示成功的弹窗
         this.$toast.success(message);
+        // 把token和id保存到本地
+        // localStorage只能保存字符串，需要使用JSON.stringify来把对象转换成字符串
+        localStorage.setItem("userInfo", JSON.stringify(data));
+        // 先暂时登录成功跳转个人中心页
+        this.$router.push("/personal");
       });
     }
   }
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+// scoped属性表示样式只针对当前的组件有效
 .w {
   width: 360px;
 }

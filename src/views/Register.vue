@@ -23,10 +23,10 @@
           placeholder="密码"
           :rules="[{ required: true, message: '请填写密码' }]"
         />
+        <!-- 如果这个按钮是在van-form组件内部，
+        并且按钮的native-type="submit"，说明点击这个按钮就会触发submit事件-->
         <div>
-          <van-button round block type="info" native-type="submit">
-            注册
-          </van-button>
+          <van-button round block type="info" native-type="submit">注册</van-button>
         </div>
       </van-form>
     </div>
@@ -60,12 +60,14 @@ export default {
         url: "/register",
         //声明请求的方法post请求
         method: "POST",
+        // 参数
         data: this.form
         // .then()接收返回的数据
+        // .then方法里面的函数就是成功的回调函数,axios没有succces
       }).then(res => {
         console.log(res);
-
         const { message } = res.data;
+        // 使用vant的弹窗提示用，success表示成功的弹窗
         this.$toast.success(message);
       });
     }
@@ -73,7 +75,7 @@ export default {
 };
 </script>
 
-<style c=lang="less" >
+<style lang="less" scoped>
 .w {
   width: 360px;
 }
