@@ -11,7 +11,6 @@
     </router-link>
   </div>
 </template>
-
 <script>
 export default {
   //声明组件可以接收的属性，label表示左边的文字，tips表示右边的文字
@@ -21,15 +20,15 @@ export default {
 
 <style lang='less' scoped>
 .listbar {
-  padding-left: 20 / 360 * 100vw;
-  height: 48 / 360 * 100vw;
-  line-height: 48 / 360 * 100vw;
+  padding-left: 20px;
+  height: 48px;
+  line-height: 48px;
   a {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px #eee solid;
     align-items: center;
-    padding-right: 20 / 360 * 100vw;
+    padding-right: 20px;
   }
   .tips {
     color: #999;

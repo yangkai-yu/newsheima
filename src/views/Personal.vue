@@ -1,30 +1,27 @@
 <template>
   <div class="container w">
     <!-- 顶部的导航条 -->
-    <div class="navigate-bar">
-      <!-- $router.back()是实例下的属性，可以直接在模板中渲染 -->
-      <span class="iconfont iconjiantou2" @click="$router.back()"></span>
-      <strong>个人中心</strong>
-      <!-- $router.push()是实例下的属性，可以直接在模板中渲染 -->
-      <span class="iconfont iconshouye" @click="$router.push('./')"></span>
-    </div>
+    <NavigateBar title="个人中心" showHome="true" />
     <!-- 头部 -->
-    <div class="header">
-      <div class="avatar">
-        <!-- $axios.defaults.baseURL 就是后台的基准路径 -->
-        <img :src="$axios.defaults.baseURL + userInfo.head_img" />
-      </div>
-      <div class="profile">
-        <div>
-          <span class="iconfont iconxingbienan" v-if="userInfo.gender ===1"></span>
-          火星网友
+    <router-link to="/editprofile">
+      <div class="header">
+        <div class="avatar">
+          <!-- $axios.defaults.baseURL 就是后台的基准路径 -->
+          <img :src="$axios.defaults.baseURL + userInfo.head_img" />
         </div>
-        <span class="iconfont iconxingbienv" v-if="userInfo.gender ===0"></span>
-        {{userInfo.nickname}}
+        <div class="profile">
+          <div>
+            <span class="iconfont iconxingbienan" v-if="userInfo.gender ===1"></span>
+            火星网友
+          </div>
+          <span class="iconfont iconxingbienv" v-if="userInfo.gender ===0"></span>
+          {{userInfo.nickname}}
+          <p>{{moment(userInfo.create_date).format('YYYY-MM-DD')}}</p>
+        </div>
+        <span class="arrow iconfont iconjiantou1"></span>
       </div>
-      <p>{{moment(userInfo.create_date).format('YYYY-MM-DD')}}</p>
-    </div>
-    <!-- <span class="arrow iconfont iconjiantou1"></span> -->
+    </router-link>
+
     <!-- 组件的调用，单双标签都可以 -->
     <!-- :key不是报错，可以不加，
     但是vue希望给循环的元素指定“唯一的key”，所以推荐我们在循环时候都加上-->
@@ -39,6 +36,7 @@
 <script>
 //导入列表按钮的组件  @代表src目录
 import Listbar from "@/components/Listbar";
+import NavigateBar from "@/components/NavigateBar";
 //第三方日期插件
 import moment from "moment";
 
@@ -58,10 +56,6 @@ export default {
         {
           label: "我的收藏",
           tips: "文章/视频"
-        },
-        {
-          label: "设置",
-          tips: ""
         }
       ],
       // 个人的详细信息,初始值给一个对象
@@ -72,7 +66,8 @@ export default {
   },
   //注册组件,导入的子组件都必须要注册才可以再模板渲染
   components: {
-    Listbar
+    Listbar,
+    NavigateBar
   },
   // 组件加载完毕后触发，类似window.onload
   mounted() {
@@ -81,10 +76,12 @@ export default {
     // 把字符串转成对象,userJson就是用户的信息对象
     const userJson = JSON.parse(jsonStr);
     // 发起异步的请求
+    //不设置请求类型默认是get请求
     this.$axios({
       url: "/user/" + userJson.user.id,
       // 添加头信息
       headers: {
+        //Authorization请求参数
         Authorization: userJson.token
       }
     }).then(res => {
@@ -95,9 +92,11 @@ export default {
       this.userInfo = data;
     });
   },
+  //方法
   methods: {
     // 退出的事件
     handleClick() {
+      //使用第三方插件
       // 询问用户是否确定退出
       this.$dialog
         .confirm({
@@ -123,30 +122,31 @@ export default {
 .w {
   width: 360px;
   margin: 100px auto;
+  height: 680px;
+  // padding-left: 20px;
 }
-.navigate-bar {
-  line-height: 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  border-bottom: 1px #eee solid;
-  .iconshouye {
-    font-size: 20px;
-  }
-}
+// .navigate-bar {
+//   line-height: 48px;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 0 20px;
+//   border-bottom: 1px #eee solid;
+//   .iconshouye {
+//     font-size: 20px;
+//   }
+// }
 .header {
-  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 5px solid #eee;
-
+  // padding-left: 0;
   .avatar {
     img {
       display: block;
-      width: 70px;
-      height: 70px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       object-fit: contain;
     }
@@ -154,7 +154,8 @@ export default {
   .profile {
     flex: 1;
     padding-left: 20px;
-    line-height: 1.5;
+    line-height: 20px;
+    font-size: 18px;
     p {
       color: #999;
     }
