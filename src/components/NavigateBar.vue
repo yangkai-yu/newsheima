@@ -21,7 +21,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  //   padding: 0 20px;
+  padding: 0 20px;
   border-bottom: 1px #eee solid;
   .iconshouye {
     font-size: 20px;

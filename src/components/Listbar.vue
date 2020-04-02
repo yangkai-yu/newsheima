@@ -2,7 +2,7 @@
 <template>
   <!-- 列表按钮栏 -->
   <div class="listbar">
-    <router-link to="#">
+    <router-link :to="path || '#' ">
       <div>{{label}}</div>
       <div class="tips">
         {{tips}}
@@ -14,7 +14,7 @@
 <script>
 export default {
   //声明组件可以接收的属性，label表示左边的文字，tips表示右边的文字
-  props: ["label", "tips"]
+  props: ["label", "tips", "path"]
 };
 </script>
 
@@ -23,6 +23,7 @@ export default {
   padding-left: 20px;
   height: 48px;
   line-height: 48px;
+
   a {
     display: flex;
     justify-content: space-between;

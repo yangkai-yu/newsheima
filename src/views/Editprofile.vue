@@ -7,7 +7,7 @@
     <div class="avatar">
       <img :src="$axios.defaults.baseURL + userInfo.head_img" />
 
-      <!-- 添加上传的组件 -->
+      <!-- 添加上传图片的组件 -->
       <van-uploader class="uploader" :after-read="afterRead" />
     </div>
 
@@ -34,12 +34,18 @@
 
     <!-- 编辑性别的按钮 -->
     <Listbar label="性别" :tips="userInfo.gender==1?'男':'女'" @click.native="showgender=true" />
+    <!-- <Listbar label="性别" :tips="['女','男'][userInfo.gender]" @click.native="showgender=true" /> -->
 
     <!-- 编辑性别的弹窗 -->
     <!-- close-on-click-action 自动关闭弹窗
         actions 弹窗菜单的选项
     select 选中某一项时候的事件-->
-    <van-action-sheet v-model="showgender" :actions="actions" @select="onSelect" />
+    <van-action-sheet
+      v-model="showgender"
+      :actions="actions"
+      @select="onSelect"
+      close-on-click-action
+    />
   </div>
 </template>
 
@@ -106,6 +112,8 @@ export default {
     afterRead(file) {
       // 创建一个表单对象，上传图片资源必须是表单类型,不能用json
       // 大家不用去纠结json还是表单的头信息，axios会自动设置的
+      console.log(file);
+      console.log(file.file);
       const fd = new FormData();
       // 通过原有的方法append给表单添加元素
       // 第一个字符串的file表示接口接收的属性，第二个 file.file是文件对象
@@ -130,7 +138,7 @@ export default {
     // 编辑用户信息的函数,可以修改头像，昵称。。。
     // data就是请求的参数
     handleEdit(data) {
-      this.$axios({
+      return this.$axios({
         url: "/user_update/" + this.userInfo.id,
         method: "POST",
         // 添加头信息
@@ -146,10 +154,12 @@ export default {
     // 修改昵称的事件
     handChangNickname() {
       // 调用编辑用户信息的函数
-      this.handleEdit({ nickname: this.nickname });
+      const Nickname = this.handleEdit({ nickname: this.nickname });
       // 同步的修改当前显示的数据
-      this.userInfo.nickname = this.nickname;
-      console.log(this.nickname);
+      Nickname.then(() => {
+        this.userInfo.nickname = this.nickname;
+        console.log(this.nickname);
+      });
     },
     // 修改密码的事件
     handChangpassword() {
@@ -159,11 +169,14 @@ export default {
     // 选中性别的时候触发的事件，item是选择的当前项
     onSelect(item) {
       // 调用编辑用户信息的函数
-      this.handleEdit({ gender: item.value });
-      // 同步的修改当前显示的数据
-      this.userInfo.gender = item.value;
+      const gender = this.handleEdit({ gender: item.value });
+      gender.then(() => {
+        // 同步的修改当前显示的数据
+        this.userInfo.gender = item.value;
+      });
+
       //隐藏弹出框
-      this.showgender = false;
+      // this.showgender = false;
     }
   }
 };

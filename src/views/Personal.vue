@@ -25,7 +25,13 @@
     <!-- 组件的调用，单双标签都可以 -->
     <!-- :key不是报错，可以不加，
     但是vue希望给循环的元素指定“唯一的key”，所以推荐我们在循环时候都加上-->
-    <Listbar v-for="(item, index) in rows" :key="index" :label="item.label" :tips="item.tips" />
+    <Listbar
+      v-for="(item, index) in rows"
+      :key="index"
+      :label="item.label"
+      :tips="item.tips"
+      :path="item.path"
+    />
     <!-- handleClick点击退出按钮时候触发 -->
     <!-- click.native这个事件类型，会给Listbar这个组件最外部的div强制绑定点击事件
     不要去跟事件传递作比较-->
@@ -37,6 +43,7 @@
 //导入列表按钮的组件  @代表src目录
 import Listbar from "@/components/Listbar";
 import NavigateBar from "@/components/NavigateBar";
+
 //第三方日期插件
 import moment from "moment";
 
@@ -47,15 +54,18 @@ export default {
       rows: [
         {
           label: "我的关注",
-          tips: "关注的用户"
+          tips: "关注的用户",
+          path: "/follow"
         },
         {
           label: "我的跟帖",
-          tips: "跟帖/回复"
+          tips: "跟帖/回复",
+          path: "/comment"
         },
         {
           label: "我的收藏",
-          tips: "文章/视频"
+          tips: "文章/视频",
+          path: "/star"
         }
       ],
       // 个人的详细信息,初始值给一个对象
