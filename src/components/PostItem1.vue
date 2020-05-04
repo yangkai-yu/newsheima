@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <router-link :to="`/post/${data.id}`">
     <!-- 循环的结构,少于3张图片的布局 -->
     <div class="imgText">
       <div class="imgText-left">
@@ -8,18 +8,19 @@
       </div>
       <img :src="$axios.defaults.baseURL + data.cover[0].url" />
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
 export default {
+  // 传入的文章数据
   props: ["data"]
 };
 </script>
 
 <style scoped lang="less">
 .imgText {
-  padding: 20px;
+  padding: 20/360 * 100vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,11 +40,11 @@ export default {
     }
   }
   img {
-    width: 110px;
-    height: 75px;
+    width: 110/360 * 100vw;
+    height: 75/360 * 100vw;
     display: block;
     object-fit: cover;
-    margin-left: 10px;
+    margin-left: 10/360 * 100vw;
     flex-shrink: 0; // 防止图片在flex布局下被挤压
   }
 }

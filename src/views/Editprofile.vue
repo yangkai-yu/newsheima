@@ -184,16 +184,16 @@ export default {
 
 <style lang="less" scoped>
 .w {
-  margin: 100px auto;
+  margin: 0 auto;
   width: 360px;
-  padding-left: 20px;
+  // padding-left: 20px;
   box-sizing: border-box;
   background-color: #f2f2f2;
   height: 680px;
   font-size: 16px;
   .avatar {
     display: flex;
-    padding: 20px;
+    // padding: 20px;
     justify-content: center;
     align-items: center;
     position: relative;

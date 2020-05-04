@@ -131,7 +131,7 @@ export default {
 <style lang="less" scoped>
 .w {
   width: 360px;
-  margin: 100px auto;
+  margin: 0 auto;
   height: 680px;
   // padding-left: 20px;
 }

@@ -9,67 +9,92 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    component: () => import("@/views/Index")
+    component: () => import("@/views/Index"),
   },
   {
     // 登录页
     path: "/login",
     // 除了首页之外的页面都可以用懒加载,@符号代表的src这个目录
     // .vue这个扩展名可以忽略
-    component: () => import("@/views/Login")
+    component: () => import("@/views/Login"),
   },
   {
     // 注册页
     path: "/register",
-    component: () => import("@/views/Register")
+    component: () => import("@/views/Register"),
   },
   {
     // 个人中心页
     path: "/personal",
     component: () => import("@/views/Personal"),
     meta: {
-      authorization: true
-    }
+      authorization: true,
+    },
   },
   {
     // 编辑资料
     path: "/editprofile",
     component: () => import("@/views/Editprofile"),
     meta: {
-      authorization: true
-    }
+      authorization: true,
+    },
   },
   {
     // 跟帖
     path: "/comment",
     component: () => import("@/views/Comment"),
     meta: {
-      authorization: true
-    }
+      authorization: true,
+    },
   },
   {
     // 关注
     path: "/follow",
     component: () => import("@/views/Follow"),
     meta: {
-      authorization: true
-    }
+      authorization: true,
+    },
   },
   {
-    // 关注
+    // 我的收藏
     path: "/star",
     component: () => import("@/views/Star"),
     meta: {
-      authorization: true
-    }
-  }
+      authorization: true,
+    },
+  },
+  {
+    // 栏目管理
+    path: "/category",
+    component: () => import("@/views/Category"),
+  },
+  {
+    // 搜索
+    path: "/search",
+    component: () => import("@/views/Search"),
+  },
+  {
+    // 搜索
+    path: "/post/:id",
+    component: () => import("@/views/Post"),
+  },
+  {
+    // 视频文章详情页
+    path: "/video/:id",
+    component: () => import("@/views/Video"),
+  },
+  {
+    // 视频文章详情页
+    path: "/post-comment/:id",
+    component: () => import("@/views/PostComment"),
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   //路由配置
-  routes
+  routes,
 });
 
 export default router;

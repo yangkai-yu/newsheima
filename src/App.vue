@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <!-- 匹配的组件的坑 -->
-    <!-- <div></div> -->
-    <router-view />
+    <!-- keep-alive会缓存组件，如果不加include会缓存所有的组件，
+    但是include需要指定缓存哪个页面组件，取的是页面组件的name值-->
+    <keep-alive include="index,search">
+      <!-- 匹配的组件的坑 -->
+      <!-- <div></div> -->
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 
@@ -31,4 +35,7 @@ i,
 em {
   font-style: normal;
 }
+// #app {
+//   -webkit-filter: grayscale(1);
+// }
 </style>

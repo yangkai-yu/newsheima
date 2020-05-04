@@ -151,7 +151,7 @@ export default {
 <style lang="less" scoped>
 .w {
   width: 360px;
-  margin: 100px auto;
+  margin: 0 auto;
   .avatar {
     display: flex;
     padding: 20px;

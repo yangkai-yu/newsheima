@@ -16,7 +16,7 @@
 
 <script>
 import NavigateBar from "@/components/NavigateBar";
-import moment from "moment";
+import moment from "";
 export default {
   components: {
     NavigateBar
@@ -73,7 +73,7 @@ export default {
 <style lang="less" scoped>
 .w {
   width: 360px;
-  margin: 100px auto;
+  margin: 0 auto;
   height: 680px;
   background-color: #f2f2f2;
   .interest {

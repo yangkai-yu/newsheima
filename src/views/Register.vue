@@ -82,7 +82,7 @@ export default {
 .box {
   height: 610px;
   background-color: #f2f2f2;
-  margin: 100px auto;
+  margin: 0 auto;
 }
 
 .close {
